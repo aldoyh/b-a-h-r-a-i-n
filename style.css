@@ -1,0 +1,194 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  background-image: url('./images/bahrain-fortress-closeup-Large.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  font-weight: bold;
+  width: 120px;
+  height: 120px;
+  margin: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Red letters */
+.B, .H, .A2, .N {
+  background-color: #ce1126; /* Bahrain red */
+  color: #f5e9d9; /* Cream color */
+}
+
+/* White letters */
+.A, .R, .I {
+  background-color: #f5e9d9; /* Cream color */
+  color: #ce1126; /* Bahrain red */
+  border: 2px solid #ce1126;
+}
+
+/* Layout classes */
+.container.final {
+  flex-direction: row;
+}
+
+.container.plain .letter {
+  background-color: transparent;
+  color: #ce1126;
+  border: none;
+}
+
+.container.columns {
+  flex-direction: column;
+  height: 100%;
+}
+
+.container.columns .letter {
+  margin: 5px;
+}
+
+.container.rows {
+  flex-direction: row;
+  width: 100%;
+}
+
+.container.rows .letter {
+  margin: 5px;
+}
+
+.container.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  width: 80%;
+  height: 80%;
+  max-width: 800px;
+  max-height: 800px;
+}
+
+.container.grid .letter {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Word styles */
+.word {
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin-top: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+  display: none;
+  text-align: center;
+  letter-spacing: 0.5px;
+  will-change: transform, opacity;
+}
+
+.container.grid .word {
+  display: block;
+}
+
+/* Arabic word styles */
+.arabic {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.4rem;
+  margin-top: 10px;
+  font-weight: 700;
+  direction: rtl;
+  letter-spacing: 0;
+}
+
+/* Red letters - word color */
+.B .word, .H .word, .A2 .word, .N .word {
+  color: #f5e9d9; /* Cream color */
+}
+
+/* White letters - word color */
+.A .word, .R .word, .I .word {
+  color: #ce1126; /* Bahrain red */
+}
+
+.kingdom, .bahrain {
+  position: absolute;
+  color: #ce1126;
+  background-color: rgba(245, 233, 217, 0.8);
+  padding: 8px 20px;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  font-family: 'Allison', cursive;
+  will-change: transform, opacity;
+}
+
+.kingdom {
+  bottom: 60%;
+  font-size: 3rem;
+}
+
+.bahrain {
+  top: 60%;
+  font-size: 8rem;
+  font-weight: bold;
+}
+
+.container.final .kingdom,
+.container.final .bahrain {
+  display: block;
+}
+
+.flag-credit {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  color: #ce1126;
+  font-weight: bold;
+  background-color: rgba(245, 233, 217, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Allison', cursive;
+  font-size: 1.5rem;
+}
