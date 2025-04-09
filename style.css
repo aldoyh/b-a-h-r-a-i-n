@@ -48,6 +48,13 @@ body {
   backface-visibility: hidden;
 }
 
+.braille {
+  font-size: 2.5rem;
+  margin-left: 0.3rem;
+  opacity: 0.8;
+  font-weight: normal;
+}
+
 /* Red letters */
 .B, .H, .A2, .N {
   background-color: #ce1126; /* Bahrain red */
