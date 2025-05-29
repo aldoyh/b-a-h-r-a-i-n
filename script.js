@@ -9,15 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const kingdom = document.querySelector('.kingdom');
   const bahrain = document.querySelector('.bahrain');
 
-
   // Initial entrance animation for letters
   gsap.from(letters, {
-    duration: 0.8,
+    duration: 1.5,
     scale: 0.5,
     opacity: 0,
     delay: 0.5, // Small delay after page load
-    stagger: 0.1,
-    ease: 'back.out(1.7)',
+    stagger: 0.2,
+    ease: 'power4.out',
     force3D: true
   });
 
@@ -52,11 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function showWords() {
     const tl = gsap.timeline();
     const wordDuration = 0.8;
-    const pulseDuration = 0.4;
-    const staggerDelay = 1.2; // Increased for better readability
+    const staggerDelay = 0.5; // Increased for better readability
 
     words.forEach((word, index) => {
-      const letterBox = word.parentElement;
       const pos = index * staggerDelay;
 
       // Word fade in and slide up
@@ -66,15 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
         duration: wordDuration,
         ease: "power2.out"
       }, pos);
-
-      // Pulse animation that works with current scale
-      tl.to(letterBox, {
-        scale: "+=0.1", // Relative scale increase
-        duration: pulseDuration,
-        ease: "back.inOut(2)",
-        yoyo: true,
-        repeat: 1
-      }, pos + 0.2); // Slight delay after word starts appearing
     });
 
     return tl;
@@ -147,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Animate the layout change with Flip
     Flip.from(state, {
       duration: 1,
-      ease: "circ.inOut",
+      ease: "power4.inOut",
       stagger: 0.7,
       scale: true, // Animate scale if it changed during Flip (shouldn't now)
       onComplete: async function () {
