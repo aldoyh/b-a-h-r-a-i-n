@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const words = document.querySelectorAll('.word');
   const kingdom = document.querySelector('.kingdom');
   const bahrain = document.querySelector('.bahrain');
+  const overlay = document.querySelector('.overlay');
 
   // Initial entrance animation for letters
   gsap.from(letters, {
