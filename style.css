@@ -85,11 +85,11 @@ body::before {
   flex-direction: row;
 }
 
-.container.plain .letter {
+/* .container.plain .letter {
   background-color: transparent;
   color: #ce1126;
   border: none;
-}
+} */
 
 .container.columns {
   flex-direction: column;
@@ -233,7 +233,7 @@ body::before {
   margin-bottom: 12px;
   background: linear-gradient(45deg, #ce1126, #d4af37);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
   background-clip: text;
   text-align: center;
   letter-spacing: 0.5px;
@@ -253,7 +253,7 @@ body::before {
 .B .story-title, .H .story-title, .A2 .story-title, .N .story-title {
   background: linear-gradient(45deg, #f5e9d9, #ffffff);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
   background-clip: text;
 }
 
