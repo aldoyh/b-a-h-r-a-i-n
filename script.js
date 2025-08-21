@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
     letterStagger: 0.2,
     wordReveal: 1.2,
     narrativeDelay: 0.8,
-    finalRevealStart: 2000, // 2 seconds before conclusion
+    finalRevealStart: 1000,
     particleDuration: 3,
-    dramaDuration: 3.5
+    dramaDuration: .5
   };
 
   // Character narratives with emotional arcs
@@ -75,15 +75,15 @@ document.addEventListener('DOMContentLoaded', function () {
     createParticle() {
       const particle = document.createElement('div');
       particle.className = `particle ${this.type}`;
-
+      
       const startX = Math.random() * 100;
       const startY = Math.random() * 100;
-
+      
       particle.style.left = `${startX}%`;
       particle.style.top = `${startY}%`;
-
+      
       this.container.appendChild(particle);
-
+      
       const tl = gsap.timeline({
         onComplete: () => {
           if (particle.parentNode) {
@@ -101,12 +101,12 @@ document.addEventListener('DOMContentLoaded', function () {
         rotation: Math.random() * 360,
         ease: "power2.out"
       })
-        .to(particle, {
-          duration: 1,
-          opacity: 0,
-          scale: 0,
-          ease: "power2.in"
-        }, "-=1");
+      .to(particle, {
+        duration: 1,
+        opacity: 0,
+        scale: 0,
+        ease: "power2.in"
+      }, "-=1");
 
       this.particles.push(particle);
     }
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
     start() {
       if (this.isActive) return;
       this.isActive = true;
-
+      
       const createInterval = setInterval(() => {
         if (!this.isActive) {
           clearInterval(createInterval);
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const particlesContainer = letter.querySelector('.particles-container');
     const narrativeType = letter.dataset.narrative;
     const storyArc = characterNarratives[narrativeType];
-
+    
     const tl = gsap.timeline();
     const baseDelay = isStaggered ? index * TIMING.letterStagger : 0;
 
@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     tl.call(() => {
-      const particleType = storyArc.emotion === 'wonder' ? 'gold' :
-        storyArc.emotion === 'warmth' ? 'silver' : 'default';
+      const particleType = storyArc.emotion === 'wonder' ? 'gold' : 
+                         storyArc.emotion === 'warmth' ? 'silver' : 'default';
       const particles = new ParticleSystem(particlesContainer, particleType);
       particles.start();
     }, null, baseDelay + 0.5);
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     tl.to(letter, {
       duration: 2,
-      className: "+=color-shift",
+      // className: "+=color-shift",
       ease: "sine.inOut"
     }, baseDelay + 2);
 
@@ -197,18 +197,21 @@ document.addEventListener('DOMContentLoaded', function () {
       className: "-=reveal-active -=color-shift"
     }, baseDelay + 4);
 
+    tl.timeScale(.2);
+
     return tl;
   }
 
   // Final dramatic sequence
   function createFinalRevealSequence() {
     const finalTl = gsap.timeline();
-
+    
     letters.forEach((letter, index) => {
       const revealDelay = index * 0.3;
-
+      
       finalTl.add(() => {
         letter.classList.add('final-reveal-active');
+        letter.classList.remove('reveal-active');
         createDramaticReveal(letter, index, false);
       }, revealDelay);
     });
@@ -223,17 +226,19 @@ document.addEventListener('DOMContentLoaded', function () {
       filter: "drop-shadow(0 0 20px rgba(206, 17, 38, 0.5))"
     }, 1);
 
+    finalTl.timeScale(.2);
+
     return finalTl;
   }
 
   // Enhanced initial entrance
   function createInitialEntrance() {
     const entranceTl = gsap.timeline();
-
+    
     letters.forEach((letter, index) => {
       const narrativeType = letter.dataset.narrative;
       const storyArc = characterNarratives[narrativeType];
-
+      
       entranceTl.from(letter, {
         duration: 1.5,
         scale: 0.3,
@@ -294,10 +299,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function hideWordsAndNarratives() {
     return new Promise(resolve => {
       const tl = gsap.timeline();
-
+      
       narratives.forEach((narrative, index) => {
         tl.to(narrative, {
-          opacity: 0,
+          // opacity: 0,
           y: 20,
           scale: 0.9,
           duration: 0.6,
@@ -307,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       tl.to(words, {
-        opacity: 0,
+        // opacity: 0,
         y: 10,
         duration: 0.6,
         ease: "power2.inOut",
@@ -354,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // 1. Capture the state before any changes
       const state = Flip.getState(letters, {
-        props: "transform,opacity,filter", // Be explicit about animated properties
+        props: "transform,filter", // Be explicit about animated properties (removed opacity to prevent transparency)
         simple: true
       });
 
@@ -365,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Handle kingdom/bahrain visibility right after the class change
       if (layouts[currentLayout] === 'final') {
-        gsap.set([kingdom, bahrain], { display: 'block', opacity: 0 }); // Set initial state for fade-in
+        // gsap.set([kingdom, bahrain], { display: 'block', opacity: 0 }); // Set initial state for fade-in
         gsap.to([kingdom, bahrain], {
           opacity: 1,
           duration: 1.2,
@@ -377,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       } else {
         gsap.to([kingdom, bahrain], {
-          opacity: 0,
+          // opacity: 0,
           duration: 0.4,
           ease: "power2.inOut",
           onComplete: () => gsap.set([kingdom, bahrain], { display: 'none' })
@@ -416,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('Animation error:', error);
     } finally {
       animationInProgress = false;
-
+      
       if (currentLayout === 0) {
         finalRevealTriggered = false;
         letters.forEach(letter => {

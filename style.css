@@ -30,7 +30,7 @@ body::before {
 }
 
 
-.container {
+.container, .word {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,7 +55,7 @@ body::before {
   transition: background-color 0.3s, color 0.3s;
   position: relative;
   overflow: hidden;
-  will-change: transform, opacity;
+  will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
@@ -63,7 +63,7 @@ body::before {
 .braille {
   font-size: 2.5rem;
   margin-left: 0.3rem;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   font-weight: normal;
 }
 
@@ -85,15 +85,9 @@ body::before {
   flex-direction: row;
 }
 
-/* .container.plain .letter {
-  background-color: transparent;
-  color: #ce1126;
+.container.plain .letter {
+  /* background-color: transparent; */
   border: none;
-} */
-
-.container.columns {
-  flex-direction: column;
-  height: 100%;
 }
 
 .container.columns .letter {
@@ -139,7 +133,7 @@ body::before {
   font-size: 1.2rem;
   font-weight: normal;
   margin-top: 15px;
-  opacity: 0;
+  /* opacity: 0; */
   transform: translateY(20px);
   display: none;
   text-align: center;
@@ -214,7 +208,7 @@ body::before {
 
 /* Enhanced Narrative Styles */
 .narrative {
-  opacity: 0;
+  /* opacity: 0; */
   transform: translateY(30px) scale(0.9);
   margin-top: 20px;
   padding: 20px;
@@ -279,7 +273,7 @@ body::before {
   height: 4px;
   background: radial-gradient(circle, rgba(206, 17, 38, 0.8), transparent);
   border-radius: 50%;
-  opacity: 0;
+  /* opacity: 0; */
   will-change: transform, opacity;
 }
 
@@ -309,7 +303,7 @@ body::before {
   background: linear-gradient(45deg, #ce1126, #d4af37, #ce1126);
   border-radius: inherit;
   z-index: -1;
-  opacity: 0.6;
+  /* opacity: 0.6; */
   animation: borderPulse 2s ease-in-out infinite;
 }
 
@@ -320,7 +314,7 @@ body::before {
   left: 50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(206, 17, 38, 0.1), transparent 70%);
+  /* background: radial-gradient(circle, rgba(206, 17, 38, 0.1), transparent 70%); */
   transform: translate(-50%, -50%);
   z-index: -2;
   animation: energyPulse 3s ease-in-out infinite;
